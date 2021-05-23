@@ -25,7 +25,10 @@
           Вход
         </button>
       </form>
+      <div class="column">
       <a @click.prevent="changeModal" class="password">Забыли пароль?</a>
+      <router-link :to="{name: 'chats'}" class="password">Вернуться на главную</router-link>
+      </div>
       <hr />
       <p class="login">Если у вас нет аккаунта создайте новый</p>
       <router-link :to="{ name: 'registration' }" v-slot="navigate">
@@ -53,5 +56,8 @@ export default {
 <style scoped>
 .password:hover {
   cursor: pointer;
+}
+.password:nth-child(1) {
+  margin-bottom: 10px;
 }
 </style>

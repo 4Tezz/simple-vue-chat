@@ -12,7 +12,7 @@
         </div>
         <div class="app-link">
           <a href="https://github.com/4Tezz" target="_blank">Github</a>
-          <button class="btn go_to_chat" @click="$router.push('/')">Перейти к чатам</button>
+          <button class="btn go_to_chat" @click="$router.push({name: 'chats'})">Перейти к чатам</button>
         </div>
       </div>
     </div>

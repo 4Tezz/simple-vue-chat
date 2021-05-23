@@ -12,7 +12,7 @@
        <div class="msg-inbox">
          <div class="chats">
            <div class="msg-page"> 
-                <outgoing-chats v-for="el in messages" :key="el" :chat="el" :id="chats.id"></outgoing-chats>
+                <outgoing-chats @deleteMessage="userMessageDelete" v-for="el in messages" :key="el" :chat="el" :id="chats.id" :el="el"></outgoing-chats>
                 <app-print v-if="print" :avatar="chats.ourAvatar"></app-print>
            </div>
          </div>
@@ -20,7 +20,7 @@
          <div class="msg-bottom">
              <form class="input-group" @submit.prevent="addMessage">
                <div class="form-control">
-                   <textarea type="text" placeholder="Написать сообщение..." v-model="text" ></textarea>
+                   <textarea type="text" placeholder="Написать сообщение..." v-model="text"></textarea>
                </div>
                <button class="btn send">Отправить</button>
              </form>
@@ -49,13 +49,14 @@ import AppPrint from './AppPrint.vue';
                 text.value = null
               }
             }
+            const userMessageDelete  = (el) => store.commit('chatMessages/deleteMessage' , el)
             watch( validate , () =>  store.commit('chatMessages/changePrints' , props.chats.id))
             onUnmounted(() => store.commit('chatMessages/unmountedPrints' , props.chats.id))
             const print = computed(() => store.getters['chatMessages/getPrints'][props.chats.ourId])
             const messages = computed(() => store.getters['chatMessages/getMessages'])
-            return {messages , text , addMessage , print}
+            return {messages , text , addMessage , print , userMessageDelete}
         },
-        components : { OutgoingChats, AppPrint}
+        components : { OutgoingChats, AppPrint ,}
     }
 </script>
 

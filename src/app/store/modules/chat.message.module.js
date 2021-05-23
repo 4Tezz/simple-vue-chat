@@ -31,6 +31,9 @@ export default {
         },
         unmountedPrints(state, value) {
             state.prints[value] = false
+        },
+        deleteMessage(state , value) {
+          state.messages = state.messages.filter(el => el.text !== value.text)
         }
     }
 }
